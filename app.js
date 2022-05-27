@@ -1,6 +1,13 @@
 const express = require('express');
+const cors = require("cors");
 const app = express();
 const morgan = require('morgan');
+
+var corsOptions = {
+  origin: "http://localhost:3000"
+};
+
+app.use(cors(corsOptions));
 
 const sampleRoute = require('./app/routes/sample');
 
