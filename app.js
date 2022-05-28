@@ -21,8 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-// cors error handling middleware
-app.use(require('./app/http/utils/cors'));
+// cors  middleware
+app.use(require('./app/http/middlewares/cors'));
 
 
 // sample route
