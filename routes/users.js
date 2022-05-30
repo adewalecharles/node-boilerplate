@@ -1,12 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const auth = require('../middleware/auth');
 
 // Get the controller
 const UsersController = require("../app/controller").UsersController;
 
 /* GET the users listing function */
-router.get('/', UsersController.getUsers);
+router.get('/', auth, UsersController.getUsers);
 
-router.post('/add', UsersController.addTwoNumbers);
+router.post('/add', auth, UsersController.addTwoNumbers);
 
 module.exports = router;
