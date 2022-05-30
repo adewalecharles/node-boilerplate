@@ -1,10 +1,10 @@
+require('dotenv').config();
 const express = require('express');
-const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
 
-    login(req,res){
+    login(req, res) {
     // validate user details here
         const user = {
             id: 1,
@@ -12,9 +12,9 @@ module.exports = {
             email: 'admin@admin.com',
             password: 'admin'
         };
-        const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
 
-        res.send(token);
+        res.status(200).json({token: token});
 
         },
 
@@ -27,9 +27,9 @@ module.exports = {
             email: 'admin@admin.com',
             password: 'admin'
         };
-        const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
 
-        res.send(token);
+        res.status(201).json({token: token});
 
     },
 
@@ -45,15 +45,16 @@ module.exports = {
         const token = req.header(tokenHeaderKey);
   
         const verified = jwt.verify(token, jwtSecretKey);
-        if(verified){
-            return res.send("Successfully Verified");
+        if (verified) {
+            res.status(200).json({message: "Successfully Verified"});
         }else{
             // Access Denied
-            return res.status(401).send(error);
+            res.status(401).json({message:'Token is not valid'});
+
         }
     } catch (error) {
         // Access Denied
-        return res.status(401).send(error);
+        res.status(401).json({message:error});
     }
     }
 }

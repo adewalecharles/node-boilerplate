@@ -1,7 +1,7 @@
 module.exports = {
 
    getUsers(req, res) {
-     res.json({ status: "success", message: "Welcome To Users API"      });
+     res.status(200).json({ status: "success", message: "Welcome To Users API"});
   },
   
    addTwoNumbers(req,res){
@@ -9,7 +9,7 @@ module.exports = {
      const add = (num1, num2) => {
      return num1 + num2;
     };
-    res.json({
+     res.status(200).json({
      status: "success",
      result: add(num1, num2)
    });
